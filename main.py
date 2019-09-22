@@ -12,7 +12,9 @@ class main:
             documents.append(self.cr.getNextDocument())
 
         # enumerates all the documents
-        print(enumerate(documents))
+        
+        
+        #print(enumerate(documents))
 
 
 if __name__ == "__main__":
