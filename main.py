@@ -1,5 +1,5 @@
 import sys
-import os 
+import time 
 from CorpusReader import *
 
 class main:
@@ -18,4 +18,6 @@ class main:
 
 
 if __name__ == "__main__":
+    start = time.time()
     main(sys.argv[1])
+    print("Execution time : {:.2f} seconds".format(time.time()-start))
