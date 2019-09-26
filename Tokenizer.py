@@ -3,7 +3,7 @@
 class Tokeninzer:
     def __init__(self,path):
         file = open(path,'r', encoding='utf-8', errors='ignore')
-        self.stopwords = set([i.strip('\n') for i in file.readlines()])
+        self.stopwords = set([i.strip('\n') for i in file.readlines()]+['s'])
     def tokenize(self,TI):
         stopwords = self.stopwords #for efficiency
         lowercase = ''.join([i if i.isalpha() else ' ' for i in TI.lower()])

@@ -10,6 +10,7 @@ class CorpusReader:
         if isfile(output):
             print('loading tokens')
             self.documents = pickle.load(open(output,'rb'))
+            print(self.documents)
         else:
             self.documents = interpreter.process(path)
             print('\nsaving tokens')
@@ -26,6 +27,6 @@ class CorpusReader:
     def getNextDocument(self):
         if not self.hasNextDocument() :
             return None
-        dic = self.documents[self.iterator]
-        self.iterator += 1
+        dic = self.documents#[self.iterator]
+        #self.iterator += 1
         return dic

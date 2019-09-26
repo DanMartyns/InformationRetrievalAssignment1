@@ -31,14 +31,14 @@ class Interpreter:
         tag = ''
         
         # iterate over file 
-        for line in file.readlines():
+        for line in file:
                 progress += len(line)
 
                 if line.find('- '):
                     
                     # for each line, split by "-", resulting in a "tag - value"                    
                     if line.startswith('   '):
-                        value+=line.strip()
+                        value+=' '+line.strip() 
                     else:
                         if value!="": 
                             # Check if the 'tag' is 'PMID' or 'TI'
