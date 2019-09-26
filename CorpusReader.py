@@ -1,4 +1,5 @@
 from Interpreter import *
+from Indexer import Indexer
 import pickle
 from os.path import isfile
 class CorpusReader:
@@ -8,9 +9,11 @@ class CorpusReader:
         # return all the documents present in the file
         output = path+'.bin'
         if isfile(output):
+            
             print('loading tokens')
             self.documents = pickle.load(open(output,'rb'))
-            print(self.documents)
+            indexer = Indexer(self.documents)
+            #print(indexer.search('chlorotetracycline as fluorescent'))
         else:
             self.documents = interpreter.process(path)
             print('\nsaving tokens')
@@ -28,5 +31,5 @@ class CorpusReader:
         if not self.hasNextDocument() :
             return None
         dic = self.documents#[self.iterator]
-        #self.iterator += 1
+        self.iterator += 1
         return dic
