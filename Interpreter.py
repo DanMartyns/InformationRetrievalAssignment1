@@ -11,11 +11,14 @@ def log(progress, maximum):
 
 class Interpreter:
 
-    def process(self,path):
-        
-        indexer = Indexer()
+    def __init__ (self,path,tokenizer) :
+        self.path = path
+        self.tokenizer = tokenizer
+
+    def process(self):
+        indexer = Indexer(self.tokenizer)
         #feedback variables
-        maximum = os.stat(path).st_size
+        maximum = os.stat(self.path).st_size
         
         # initialize the variables
         i=0
@@ -24,7 +27,7 @@ class Interpreter:
         PMID = None
         
         # open the file
-        file = open(path,'r', encoding='utf-8', errors='ignore')
+        file = open(self.path,'r', encoding='utf-8', errors='ignore')
         value = ''
         tag = ''
         

@@ -4,8 +4,12 @@ import pickle
 from os.path import isfile
 class CorpusReader:
     
-    def __init__(self,path):
-        interpreter = Interpreter()
+    def __init__(self,path,tokenizer,search):
+        self.path = path
+        self.tokenizer = tokenizer
+        self.search = search
+        
+        interpreter = Interpreter(self.path,self.tokenizer)
         # return all the documents present in the file
         output = path+'.bin'
         if isfile(output):
@@ -13,9 +17,10 @@ class CorpusReader:
             print('loading tokens')
             self.documents = pickle.load(open(output,'rb'))
             indexer = Indexer(self.documents)
-            #print(indexer.search('chlorotetracycline as fluorescent'))
+            if self.search != '':
+                print(indexer.search(self.search))
         else:
-            self.documents = interpreter.process(path)
+            self.documents = interpreter.process()
             print('\nsaving tokens')
             pickle.dump(self.documents, open(output,'wb'))
         

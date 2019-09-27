@@ -2,9 +2,14 @@ from Tokenizer import Tokeninzer
 
 
 class Indexer:
-    def __init__(self, index = {}):
+    def __init__(self, Tokenizer, index = {}):
+        self.Tokeninzer = Tokeninzer
         self.index = index 
-        self.tokeninzer = Tokeninzer('snowball_stopwords_EN.txt') 
+        if Tokeninzer:
+            self.tokeninzer = Tokeninzer('snowball_stopwords_EN.txt') 
+        else :
+            self.tokeninzer = Tokeninzer_2_1('snowball_stopwords_EN.txt')
+
     def add_document(self,document, body):
         tokens = self.tokeninzer.tokenize(body)
         for t in tokens:
