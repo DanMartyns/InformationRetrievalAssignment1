@@ -1,4 +1,4 @@
-from Tokenizer import Tokeninzer
+from Tokenizer import Tokeninzer, Tokeninzer_2_1
 
 
 class Indexer:
