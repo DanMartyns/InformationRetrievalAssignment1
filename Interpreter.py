@@ -48,10 +48,7 @@ class Interpreter:
                                 indexer.add_document(PMID, value)
                         tag, *values = line.split('- ')
                         tag = tag.strip()
-                        value = '- '.join(values).strip('\n')
-                        
-                    #print('line',line)
-                    #print('tag',tag)               
+                        value = '- '.join(values).strip('\n')               
                     
                     i+=1
                     if i>=5000:
@@ -60,11 +57,4 @@ class Interpreter:
 
                             
         file.close()
-        #print([{'PMID':i,'TI':t} for i,t in zip(PMID,TI)])
-        
-        # returns a list consisting of several dictionaries
-        # each dictionary will represent a document
-        # return {i:t for i,t in zip(PMID,TI) } returns directly to index
-
         return indexer.index
-        #return [ {'PMID': i,'TI': t} for i,t in zip(PMID,TI)]
