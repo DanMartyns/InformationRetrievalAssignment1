@@ -4,10 +4,11 @@ import pickle
 from os.path import isfile
 class CorpusReader:
     
-    def __init__(self,path,tokenizer,search):
+    def __init__(self,path,tokenizer,search,write):
         self.path = path
         self.tokenizer = tokenizer
         self.search = search
+        self.write = write
         
         interpreter = Interpreter(self.path,self.tokenizer)
         # return all the documents present in the file
@@ -16,15 +17,17 @@ class CorpusReader:
             
             print('loading tokens')
             self.documents = pickle.load(open(output,'rb'))
-            indexer = Indexer(self.tokenizer,index = self.documents)
-            indexer.writeIndexToFile(f"{path}_indexer.txt")
-            if self.search != '':
-                print(indexer.search(self.search))
+            
         else:
             self.documents = interpreter.process()
             print('\nsaving tokens')
             pickle.dump(self.documents, open(output,'wb'))
-        
+          
+        indexer = Indexer(self.tokenizer,index = self.documents)
+        if self.search != '':
+            print(indexer.search(self.search))
+        if self.write:
+            indexer.writeIndexToFile(f"{path}_indexer.txt")
         # initialize iterator variable                
         self.iterator = 0
     

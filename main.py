@@ -8,15 +8,13 @@ import os
 class main:
 
     def __init__(self, path,tokenizer,search,write):
-        self.cr = CorpusReader(path,tokenizer,search)
+        self.cr = CorpusReader(path,tokenizer,search,write)
         documents = []
 
         while(self.cr.hasNextDocument()):
             documents.append(self.cr.getNextDocument())
-        
-        index = Indexer(tokenizer)
-        if write:
-            index.writeIndexToFile(args.file)
+    
+
 
 
 if __name__ == "__main__":
