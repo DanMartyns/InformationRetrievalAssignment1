@@ -37,12 +37,12 @@ class Indexer:
         
         return sorted([(v, k) for k,v in documents.items()])[::-1] 
     
-    def writeIndexToFile(self):
+    def writeIndexToFile(self, output=''):
         #aaaaa,doc id:term freq,doc id:term freq,…
         #aaaab,doc id:term freq,doc id:term freq,…
         #aaaac,doc id:term freq,doc id:term freq,…
         keys = sorted(self.index.keys())
+        #fw = file('')
         for k in keys:
-            #print(([k]+[ for in ]),sep=',')
-            break
+            print(*([k]+[info for d in self.index[k] for info in d]),sep=',')
         

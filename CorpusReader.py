@@ -17,6 +17,7 @@ class CorpusReader:
             print('loading tokens')
             self.documents = pickle.load(open(output,'rb'))
             indexer = Indexer(self.tokenizer,index = self.documents)
+            indexer.writeIndexToFile()
             if self.search != '':
                 print(indexer.search(self.search))
         else:
