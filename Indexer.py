@@ -8,15 +8,19 @@ class Indexer:
         if Tokeninzer:
             self.tokeninzer = Tokeninzer('snowball_stopwords_EN.txt') 
         else :
-            self.tokeninzer = Tokeninzer_2_1('snowball_stopwords_EN.txt')
+            self.tokeninzer = Tokeninzer_2_1()
 
     def add_document(self,document, body):
         tokens = self.tokeninzer.tokenize(body)
+        lastToken = None
         for t in tokens:
+            if lastToken==t:
+                continue
             if t in self.index:
-                self.index[t].append(document)
+                self.index[t].append((document, tokens.count(t)))
             else:
-                self.index[t] = [document]
+                self.index[t] = [(document, tokens.count(t))]
+            lastToken = t
     def search(self, query):
         tokens = self.tokeninzer.tokenize(query)
         print('search tokens:',tokens)
@@ -24,14 +28,21 @@ class Indexer:
         for t in tokens:
             if t not in self.index: continue
             for d in self.index[t]:
-                
-                if d not in documents:
-                    documents[d] = 1
+                doc, count = d
+                if doc not in documents:
+                    documents[doc] = count
                 else:
-                    documents[d]+=1
+                    documents[doc]+=count
 
         
         return sorted([(v, k) for k,v in documents.items()])[::-1] 
-
-
+    
+    def writeIndexToFile(self):
+        #aaaaa,doc id:term freq,doc id:term freq,…
+        #aaaab,doc id:term freq,doc id:term freq,…
+        #aaaac,doc id:term freq,doc id:term freq,…
+        keys = sorted(self.index.keys())
+        for k in keys:
+            #print(([k]+[ for in ]),sep=',')
+            break
         
