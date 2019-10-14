@@ -1,17 +1,11 @@
-from Tokenizer import Tokeninzer, Tokeninzer_2_1
-
 
 class Indexer:
     def __init__(self, Tokenizer, index = {}):
-        self.Tokeninzer = Tokeninzer
         self.index = index 
-        if Tokeninzer:
-            self.tokeninzer = Tokeninzer('snowball_stopwords_EN.txt') 
-        else :
-            self.tokeninzer = Tokeninzer_2_1()
+        self.tokenizer = Tokenizer('snowball_stopwords_EN.txt') 
 
     def add_document(self,document, body):
-        tokens = self.tokeninzer.tokenize(body)
+        tokens = self.tokenizer.tokenize(body)
         lastToken = None
         for t in tokens:
             if lastToken==t:
@@ -22,7 +16,7 @@ class Indexer:
                 self.index[t] = [(document, tokens.count(t))]
             lastToken = t
     def search(self, query):
-        tokens = self.tokeninzer.tokenize(query)
+        tokens = self.tokenizer.tokenize(query)
         print('search tokens:',tokens)
         documents = {}
         for t in tokens:

@@ -3,37 +3,19 @@ import os
 from collections import deque
 
 
-
-def log(progress, maximum):
-    perc = round(progress/maximum*50)
-    going = perc<50
-    print('\r ['+'='*perc+ '>'*going+'.'*(50-perc-going)+'] ',str(perc*2)+'%',end = '\r')
-
 class Interpreter:
 
     def __init__ (self,path,tokenizer) :
         self.path = path
         self.tokenizer = tokenizer
 
-    def process(self):
-        indexer = Indexer(self.tokenizer)
-        #feedback variables
-        maximum = os.stat(self.path).st_size
-        
-        # initialize the variables
-        i=0
-        progress = 0
+    def process(self, indexer, document):
         
         PMID = None
-        
-        # open the file
-        file = open(self.path,'r', encoding='utf-8', errors='ignore')
         value = ''
         tag = ''
-        
         # iterate over file 
-        for line in file:
-                progress += len(line)
+        for line in document:
 
                 if line.find('- '):
                     
@@ -48,13 +30,4 @@ class Interpreter:
                                 indexer.add_document(PMID, value)
                         tag, *values = line.split('- ')
                         tag = tag.strip()
-                        value = '- '.join(values).strip('\n')               
-                    
-                    i+=1
-                    if i>=5000:
-                        i=0
-                        log(progress, maximum)
-
-                            
-        file.close()
-        return indexer.index
+                        value = '- '.join(values).strip('\n')              

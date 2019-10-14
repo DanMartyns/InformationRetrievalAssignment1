@@ -8,12 +8,8 @@ import os
 class main:
 
     def __init__(self, path,tokenizer,search,write):
-        self.cr = CorpusReader(path,tokenizer,search,write)
-        documents = []
-
-        while(self.cr.hasNextDocument()):
-            documents.append(self.cr.getNextDocument())
-    
+        cr = CorpusReader(path,tokenizer,search,write)
+        cr.processFile()
 
 
 
@@ -27,8 +23,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    index = Indexer(args.tokenizer)
-
     start = time.time()
     
     if args.delete:

@@ -12,7 +12,7 @@ class Tokeninzer:
         return sorted([st.stemWord(i) for i in lowercase.replace('  ',' ').split() if i not in stopwords])
     
 class Tokeninzer_2_1: #no stopwords implemented
-    def __init__(self):
+    def __init__(self, path):
         pass
     def tokenize(self,TI):
         lowercase = ''.join([i if i.isalpha() else ' ' for i in TI.lower()])
