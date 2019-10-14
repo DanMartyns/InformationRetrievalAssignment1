@@ -1,16 +1,18 @@
 import sys
 import time
 import argparse
-from CorpusReader import *
-from Indexer import *
+from CorpusReader import CorpusReader
 import os
 
 class main:
 
     def __init__(self, path,tokenizer,search,write):
-        cr = CorpusReader(path,tokenizer,search,write)
+        cr = CorpusReader(path,tokenizer)
         cr.processFile()
-
+        if search != '':
+            print(cr.indexer.search(search))
+        if write:
+            cr.indexer.writeIndexToFile(f"{path}_indexer.txt")
 
 
 if __name__ == "__main__":

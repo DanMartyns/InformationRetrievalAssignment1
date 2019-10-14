@@ -13,11 +13,9 @@ def log(progress, maximum):
 
 class CorpusReader:
     
-    def __init__(self,path,tokenizer,search,write):
+    def __init__(self,path,tokenizer):
         self.path = path
         self.tokenizer = Tokeninzer_2_1 if tokenizer else Tokeninzer
-        self.search = search
-        self.write = write
         
     
     # check if there is a next Document
@@ -28,10 +26,10 @@ class CorpusReader:
         output = self.path+'.bin'
         if isfile(output):
             print('loading tokens')
-            self.documents = pickle.load(open(output,'rb'))
-            indexer = Indexer(self.tokenizer,index = self.documents)
+            self.index = pickle.load(open(output,'rb'))
+            self.indexer = Indexer(self.tokenizer,index = self.index)
         else:
-            indexer = Indexer(self.tokenizer)
+            self.indexer = Indexer(self.tokenizer)
             file = open(self.path,'r', encoding='utf-8', errors='ignore')
             maximum = os.stat(self.path).st_size
             # initialize the variables
@@ -41,7 +39,7 @@ class CorpusReader:
             for line in file:
                     progress += len(line)
                     if line=='\n':
-                        interpreter.process(indexer, document)
+                        interpreter.process(self.indexer, document)
                         document = []
                     else:
                         document+=[line]
@@ -52,13 +50,9 @@ class CorpusReader:
 
                             
             file.close()
-            self.documents = indexer.index
+            self.index = self.indexer.index
             print('\nsaving tokens')
-            pickle.dump(self.documents, open(output,'wb'))
+            pickle.dump(self.index, open(output,'wb'))
           
-        
-        if self.search != '':
-            print(indexer.search(self.search))
-        if self.write:
-            indexer.writeIndexToFile(f"{self.path}_indexer.txt")
+    
 
