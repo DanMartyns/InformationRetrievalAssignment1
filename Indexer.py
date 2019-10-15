@@ -9,9 +9,10 @@ class Indexer:
         lastToken = None
         for t in tokens:
             if lastToken==t:
+                self.index[t][-1] = (self.index[t][-1][0], self.index[t][-1][1]+1)
                 continue
             if t in self.index:
-                self.index[t].append((document, tokens.count(t)))
+                self.index[t].append((document, 1))
             else:
                 self.index[t] = [(document, tokens.count(t))]
             lastToken = t
