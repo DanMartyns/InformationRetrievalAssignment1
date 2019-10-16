@@ -20,7 +20,7 @@ class CorpusReader:
     
     # check if there is a next Document
     def processFile(self):
-        interpreter = Interpreter(self.path,self.tokenizer)
+        interpreter = Interpreter()
         
         # return all the documents present in the file
         output = self.path+'.bin'

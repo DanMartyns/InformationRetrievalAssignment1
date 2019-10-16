@@ -14,10 +14,13 @@ def sizeof_fmt(num, suffix='B'):
 
 def metrics(indexer):
     index = indexer.index
+    
     keyvalue = [(j[1],j[0]) for j in sorted([( sum( [i[1] for i in v]  ) ,k) for k,v in index.items()])[-10:][::-1]]
     
-    print(keyvalue)
-
+    print("10 most frequent terms:", keyvalue)
+    
+    singleterm = sorted([k for k,v in index.items() if sum(i[1] for i in v)==1])[:10][::-1]
+    print(" first 10 terms with document frequency==1:", singleterm)
 
 
 class main:

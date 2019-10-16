@@ -5,9 +5,8 @@ from collections import deque
 
 class Interpreter:
 
-    def __init__ (self,path,tokenizer) :
-        self.path = path
-        self.tokenizer = tokenizer
+    def __init__ (self):
+        pass
 
     def process(self, indexer, document):
         
