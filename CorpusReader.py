@@ -5,6 +5,12 @@ import pickle
 from os.path import isfile
 import os
 
+# authors
+# 80026 Daniel Martins
+# 80305 João Ferreira
+
+
+
 def log(progress, maximum):
     perc = round(progress/maximum*50)
     going = perc<50

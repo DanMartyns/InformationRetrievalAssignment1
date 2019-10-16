@@ -2,6 +2,10 @@ from Indexer import Indexer
 import os
 from collections import deque
 
+# authors
+# 80026 Daniel Martins
+# 80305 João Ferreira
+
 
 class Interpreter:
 

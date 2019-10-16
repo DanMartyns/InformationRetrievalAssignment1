@@ -1,6 +1,11 @@
 
 from Stemmer import Stemmer
 
+# authors
+# 80026 Daniel Martins
+# 80305 João Ferreira
+
+
 class Tokeninzer:
     
     def __init__(self,path):

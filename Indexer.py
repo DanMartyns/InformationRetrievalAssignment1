@@ -1,3 +1,7 @@
+# authors
+# 80026 Daniel Martins
+# 80305 João Ferreira
+
 
 class Indexer:
     def __init__(self, Tokenizer, index = {}):
